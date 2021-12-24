@@ -37,6 +37,7 @@ fn main() {
     println!("{:?}", assignments.get_by_department(String::from("Engineering")));
     println!("{:?}", assignments.get_by_department(String::from("Product")));
     println!("{:?}", assignments.get_by_department(String::from("Finance")));
+    println!("{:?}", assignments.get_all_by_department());
 }
 
 struct DepartmentAssignments {
@@ -56,9 +57,13 @@ impl DepartmentAssignments {
        new_vec
     }
 
-    /*fn get_all_by_department() -> HashMap<String, Vec<String>> {
-
-    }*/
+    fn get_all_by_department(&self) -> Vec<(String, Vec<String>)> {
+        let mut new_vec: Vec<(String, Vec<String>)> = Vec::new();
+        for (dept, names) in self.dept_to_names.iter() {
+            new_vec.push((dept.clone(), names.to_vec()));
+        }
+        new_vec
+    }
 }
 
 fn is_vowel(c: &char) -> bool {
